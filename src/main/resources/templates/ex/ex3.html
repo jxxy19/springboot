@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/fragment.html}">
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>이벤트 게시판</h1>
+<!--    <p><a href="?파라미터">페이징</a></p>-->
+</div>
+<script layout:fragment="script" th:inline="javascript">
+    const arr = [[${arr}]]
+</script>
+</body>
+</html>
+

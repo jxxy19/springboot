@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h4>[[${list}]]</h4>
+
+    <hr>
+    <h4 th:text="${list}"></h4>
+    <br><hr><br>
+    <div th:with="num1=${10}, num2=${20},
+                  num3=${30}, num4=${40}">
+<!--        사용할 변수 선언 구분은 ,-->
+        <h3 th:text="${num2+num3}"></h3>
+<!--        <h3 th:text="${num2+num3}"><span th:text="${num4}"></span></h3>-->
+<!--        덮어씌워짐...-->
+        <h3>${num2+num3}</h3>
+<!--    출력 x -> 서버쪽 태그여서 서버에서 결과가 나온 후 , 연산이 끝난 후 결과값이 나오는 것-->
+<!--        -->
+<!--        <h3 th:if test="">-->
+<!--        </h3>-->
+<!--        <h3 th:unless="">-->
+<!--        </h3>-->
+<!--        if  else처럼 같이 묶인 것은 아니지만, if, else처럼 둘이 붙으면 사용 가능함.-->
+    </div>
+    <br><hr><br>
+    <h3>if문 자바스크립트 연동</h3>
+    <br><hr><br>
+    <ul>
+        <li th:each="str, status:${list}" onclick="javascript=alert('ddddd')">
+            <span th:if="${status.odd}">status : odd - [[${str}]]</span>
+<!--         홀수 일 때만 출력하도록-->
+        </li>
+    </ul>
+    <ul>
+        <li th:each="str, status:${list}" th:if="${status.odd}">
+            <th:text>status - odd</th:text>
+            <br>${str} : <span>${str}</span>
+            <br>[[${str}]] : <th:text>[[${str}]]</th:text>
+            <!--         홀수 일 때만 출력하도록-->
+        </li>
+    </ul>
+    <ul>
+        <li th:each="str, status:${list}" th:if="${status.even}">
+            <th:text>status - even</th:text>
+            <br>${str} : <span>${str}</span>
+            <br>[[${str}]] : <th:text>[[${str}]]</th:text>
+            <!--         홀수 일 때만 출력하도록-->
+        </li>
+    </ul>
+    <br><hr><br>
+    <h3>foreach</h3>
+    <br><hr><br>
+<!--    unless-->
+    <ul>
+        <li th:each="str, status:${list}" >
+            <span th:if="${status.even}">[[${str}]] : <th:text>[[${str}]]</th:text></span>
+            <span th:unless="${status.even}" >[[${str}]] : <th:text>[[${str}]]</th:text></span>
+            <!--         홀수 일 때만 출력하도록-->
+        </li>
+    </ul>
+
+
+<!--한줄 주석-->
+<!--/*여러
+줄
+주석*/-->
+    <br><hr><br>
+    <h3>삼항연산자</h3>
+    <br><hr><br>
+    <ul>
+        <li th:each="str, status:${list}">
+            <span th:text="${status.odd}?'STATUS : ODD -'+${str}: 'status : even -'+${str}"></span>
+        </li>
+    </ul>
+    <br><hr><br>
+    <h3>switch ~ case</h3>
+    <ul>
+        <li th:each="str, status:${list}">
+            <th:block th:switch="${status.index % 2}">
+                <span th:case="${0}">0-ODD</span>
+                <span th:case="1">1-EVEN</span>
+            </th:block>
+        </li>
+    </ul>
+    <ul>
+        <li th:each="str, status:${list}">
+            <th:block th:switch="${status.index % 2}">
+                <span th:case="${0}">status.index : [[${status.index}]] -- ${status.index % 2} = [[${status.index%2}]]</span>
+                <span th:case="${1}">status.index : [[${status.index}]] -- ${status.index % 2} = [[${status.index%2}]]</span>
+<!--                <span th:case="1">1-EVEN</span>-->
+            </th:block>
+        </li>
+    </ul>
+<script>
+    const a = document.getElementsByTagName("h3").innerText = "";
+</script>
+</body>
+</html>
